@@ -1,10 +1,12 @@
-﻿namespace SkyfallAPI.Models;
+﻿using SkyfallAPI.Models.Enums;
+
+namespace SkyfallAPI.Models;
 
 public class Spell
 {
     public long Id { get; set; }
     public string? Name { get; set; }
-    public string? Action { get; set; }
+    public ActionTypeEnum Action { get; set; }
     public int Cost { get; set; }
     public string? Description { get; set; }
     public string? Execution { get; set; }
