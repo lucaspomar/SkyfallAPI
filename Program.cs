@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<SkyfallDbContext>(options =>
 {
-    options.UseInMemoryDatabase("SkyfallDatabase");
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:DatabaseConnection"]);
 });
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
