@@ -16,41 +16,46 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
     public void Add(T entity)
     {
-        throw new NotImplementedException();
+        _context.Set<T>().Add(entity);
     }
 
     public void AddList(IEnumerable<T> entities)
     {
-        throw new NotImplementedException();
+        _context.Set<T>().AddRange(entities);
     }
 
     public void Delete(T entity)
     {
-        throw new NotImplementedException();
+        _context.Set<T>().Remove(entity);
     }
 
     public void DeleteList(IEnumerable<T> entities)
     {
-        throw new NotImplementedException();
+        _context.Set<T>().RemoveRange(entities);
     }
 
     public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
     {
-        throw new NotImplementedException();
+        return _context.Set<T>().Where(expression);
     }
 
     public IEnumerable<T> GetAll()
     {
-        throw new NotImplementedException();
+        return _context.Set<T>().ToList();
     }
 
-    public T GetById(int id)
+    public T? GetById(int id)
     {
-        throw new NotImplementedException();
+        return _context.Set<T>().Find(id);
+    }
+
+    public int Save()
+    {
+        return _context.SaveChanges();
     }
 
     public void Update(T entity)
     {
-        throw new NotImplementedException();
+        _context.Set<T>().Update(entity);
     }
 }
