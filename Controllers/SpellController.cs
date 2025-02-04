@@ -2,16 +2,15 @@
 using Microsoft.AspNetCore.Mvc;
 using SkyfallAPI.Models;
 
-namespace SkyfallAPI.Controllers
+namespace SkyfallAPI.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class SpellController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class SpellController : ControllerBase
+    [HttpGet]
+    public ActionResult<List<Spell>> GetAllSpells()
     {
-        [HttpGet]
-        public ActionResult<List<Spell>> GetAllSpells()
-        {
-            return Ok();
-        }
+        return Ok();
     }
 }
