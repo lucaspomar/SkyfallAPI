@@ -16,8 +16,6 @@ public class Spell
     public string? Duration { get; set; }
     public string? Attack { get; set; }
     public string? Effect { get; set; }
-    public string? Miss { get; set; }
-    public string? Special { get; set; }
 
     //public string Layer { get; set; }
     //public string Tags { get; set; }
