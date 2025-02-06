@@ -34,12 +34,12 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         _context.Set<T>().RemoveRange(entities);
     }
 
-    public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
+    public List<T> Find(Expression<Func<T, bool>> expression)
     {
-        return _context.Set<T>().Where(expression);
+        return _context.Set<T>().Where(expression).ToList();
     }
 
-    public IEnumerable<T> GetAll()
+    public List<T> GetAll()
     {
         return _context.Set<T>().ToList();
     }
