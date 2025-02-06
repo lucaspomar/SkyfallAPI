@@ -44,7 +44,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return _context.Set<T>().ToList();
     }
 
-    public T? GetById(int id)
+    public T? GetById(long id)
     {
         return _context.Set<T>().Find(id);
     }

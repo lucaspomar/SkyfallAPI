@@ -4,7 +4,7 @@ namespace SkyfallAPI.Repositories.Interfaces;
 
 public interface IGenericRepository<T> where T : class
 {
-    T? GetById(int id);
+    T? GetById(long id);
     List<T> GetAll();
     void Add(T entity);
     void AddList(IEnumerable<T> entities);
