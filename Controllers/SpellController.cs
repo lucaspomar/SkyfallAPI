@@ -58,4 +58,22 @@ public class SpellController : ControllerBase
         _spellRepository.Save();
         return Ok();
     }
+
+    [HttpPut("{id}")]
+    public ActionResult<Spell> UpdateSpell([FromBody] Spell spell, long id)
+    {
+        if (spell.Id != id)
+        {
+            return BadRequest();
+        }
+
+        if (!_spellRepository.CheckIfExists(id))
+        {
+            return NotFound();
+        }
+
+        _spellRepository.Update(spell);
+        _spellRepository.Save();
+        return Ok(spell);
+    }
 }

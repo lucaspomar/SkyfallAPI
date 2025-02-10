@@ -13,4 +13,5 @@ public interface IGenericRepository<T> where T : class
     void DeleteList(IEnumerable<T> entities);
     List<T> Find(Expression<Func<T, bool>> expression);
     int Save();
+    bool CheckIfExists(long id);
 }

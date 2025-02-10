@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using SkyfallAPI.Data;
 using SkyfallAPI.Repositories.Interfaces;
 
@@ -57,5 +58,16 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     public void Update(T entity)
     {
         _context.Set<T>().Update(entity);
+    }
+
+    public bool CheckIfExists(long id)
+    {
+        T? entity = _context.Set<T>().Find(id);
+
+        if (entity != null)
+        {
+            _context.Entry(entity).State = EntityState.Detached;
+        }
+        return entity != null;
     }
 }
