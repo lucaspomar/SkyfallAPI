@@ -43,4 +43,19 @@ public class SpellController : ControllerBase
         _spellRepository.Save();
         return Created();
     }
+
+    [HttpDelete("{id}")]
+    public ActionResult<Spell> DeleteSpell(long id)
+    {
+        Spell? spell = _spellRepository.GetById(id);
+
+        if (spell == null)
+        {
+            return NotFound();
+        }
+
+        _spellRepository.Delete(spell);
+        _spellRepository.Save();
+        return Ok();
+    }
 }
