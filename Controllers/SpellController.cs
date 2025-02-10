@@ -27,6 +27,12 @@ public class SpellController : ControllerBase
     public ActionResult<Spell> GetSpellById(long id)
     {
         Spell? spell = _spellRepository.GetById(id);
+
+        if (spell == null)
+        {
+            return NotFound();
+        }
+
         return Ok(spell);
     }
 
