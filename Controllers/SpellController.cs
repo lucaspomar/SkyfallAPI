@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using FluentValidation.Results;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SkyfallAPI.Models;
 using SkyfallAPI.Repositories.Interfaces;
@@ -10,10 +13,12 @@ namespace SkyfallAPI.Controllers;
 public class SpellController : ControllerBase
 {
     private readonly ISpellRepository _spellRepository;
+    private readonly IValidator<Spell> _spellValidator;
 
-    public SpellController(ISpellRepository spellRepository)
+    public SpellController(ISpellRepository spellRepository, IValidator<Spell> spellValidator)
     {
         _spellRepository = spellRepository;
+        _spellValidator = spellValidator;
     }
 
     [HttpGet]
@@ -39,6 +44,13 @@ public class SpellController : ControllerBase
     [HttpPost]
     public ActionResult<Spell> PostSpell([FromBody] Spell spell)
     {
+        ValidationResult result = _spellValidator.Validate(spell);
+        if (!result.IsValid)
+        {
+            result.AddToModelState(ModelState);
+            return ValidationProblem(ModelState);
+        }
+
         _spellRepository.Add(spell);
         _spellRepository.Save();
         return Created();
