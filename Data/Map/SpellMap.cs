@@ -16,7 +16,7 @@ public class SpellMap : IEntityTypeConfiguration<Spell>
         builder.Property(x => x.Execution).HasMaxLength(50);
         builder.Property(x => x.Range).IsRequired().HasMaxLength(50);
         builder.Property(x => x.Target).IsRequired().HasMaxLength(50);
-        builder.Property(x => x.Components).IsRequired().HasMaxLength(50);
+        builder.Property(x => x.Components).HasMaxLength(50);
         builder.Property(x => x.Duration).IsRequired().HasMaxLength(50);
         builder.Property(x => x.Attack).HasMaxLength(50);
         builder.Property(x => x.Effect).IsRequired().HasMaxLength(1000);
