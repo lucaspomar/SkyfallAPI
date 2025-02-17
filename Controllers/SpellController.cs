@@ -84,6 +84,13 @@ public class SpellController : ControllerBase
             return NotFound();
         }
 
+        ValidationResult result = _spellValidator.Validate(spell);
+        if (!result.IsValid)
+        {
+            result.AddToModelState(ModelState);
+            return ValidationProblem(ModelState);
+        }
+
         _spellRepository.Update(spell);
         _spellRepository.Save();
         return Ok(spell);
