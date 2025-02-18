@@ -4,6 +4,7 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SkyfallAPI.Models;
+using SkyfallAPI.Models.DTO;
 using SkyfallAPI.Repositories.Interfaces;
 
 namespace SkyfallAPI.Controllers;
@@ -22,7 +23,7 @@ public class SpellController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<List<Spell>> GetAllSpells([FromQuery] int page = 1, [FromQuery] int size = 10)
+    public ActionResult<PaginationResponse<Spell>> GetAllSpells([FromQuery] int page = 1, [FromQuery] int size = 10)
     {
         if (page < 1 | size < 1)
         {
@@ -32,14 +33,8 @@ public class SpellController : ControllerBase
         int totalItems = _spellRepository.CountAll();
         int totalPages = (int)Math.Ceiling((double) totalItems / size);
         List<Spell> spells = _spellRepository.GetPage(page - 1, size);
-        return Ok(new
-        {
-            totalItems,
-            totalPages,
-            page,
-            size,
-            spells,
-        });
+        PaginationResponse<Spell> pageResponse = new PaginationResponse<Spell>(totalItems, totalPages, page, size, spells);
+        return Ok(pageResponse);
     }
 
     [HttpGet("{id}")]
