@@ -24,6 +24,11 @@ public class SpellController : ControllerBase
     [HttpGet]
     public ActionResult<List<Spell>> GetAllSpells([FromQuery] int page = 1, [FromQuery] int size = 10)
     {
+        if (page < 1 | size < 1)
+        {
+            return BadRequest("'Page' e 'size precissam ser maiores que 0.'");
+        }
+
         int totalItems = _spellRepository.CountAll();
         int totalPages = (int)Math.Ceiling((double) totalItems / size);
         List<Spell> spells = _spellRepository.GetPage(page - 1, size);
@@ -85,7 +90,7 @@ public class SpellController : ControllerBase
     {
         if (spell.Id != id)
         {
-            return BadRequest();
+            return BadRequest("'id' da rota não pode ser diferente do 'id' do corpo.");
         }
 
         if (!_spellRepository.CheckIfExists(id))
