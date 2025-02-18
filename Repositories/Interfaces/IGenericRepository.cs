@@ -6,6 +6,7 @@ public interface IGenericRepository<T> where T : class
 {
     T? GetById(long id);
     List<T> GetAll();
+    List<T> GetPage(int page, int size);
     void Add(T entity);
     void AddList(IEnumerable<T> entities);
     void Update(T entity);
@@ -14,4 +15,5 @@ public interface IGenericRepository<T> where T : class
     List<T> Find(Expression<Func<T, bool>> expression);
     int Save();
     bool CheckIfExists(long id);
+    int CountAll();
 }

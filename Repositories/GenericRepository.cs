@@ -70,4 +70,18 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         }
         return entity != null;
     }
+
+    public List<T> GetPage(int page, int size)
+    {
+        return _context.Set<T>()
+            .AsNoTracking()
+            .Skip(page * size)
+            .Take(size)
+            .ToList();
+    }
+
+    public int CountAll()
+    {
+        return _context.Set<T>().Count();
+    }
 }

@@ -22,10 +22,19 @@ public class SpellController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<List<Spell>> GetAllSpells()
+    public ActionResult<List<Spell>> GetAllSpells([FromQuery] int page = 1, [FromQuery] int size = 10)
     {
-        List<Spell> spells = _spellRepository.GetAll();
-        return Ok(spells);
+        int totalItems = _spellRepository.CountAll();
+        int totalPages = (int)Math.Ceiling((double) totalItems / size);
+        List<Spell> spells = _spellRepository.GetPage(page - 1, size);
+        return Ok(new
+        {
+            totalItems,
+            totalPages,
+            page,
+            size,
+            spells,
+        });
     }
 
     [HttpGet("{id}")]
