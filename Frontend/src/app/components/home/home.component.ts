@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { TopbarComponent } from '../topbar/topbar.component';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [
+    TopbarComponent
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
