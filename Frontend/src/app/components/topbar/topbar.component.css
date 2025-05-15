@@ -5,3 +5,8 @@
 .item {
     padding: 0 14px;
 }
+
+.topbar {
+    background-color: var(--mat-sys-primary-container);
+    color: var(--mat-sys-on-primary-container);
+}
