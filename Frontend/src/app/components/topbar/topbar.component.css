@@ -4,9 +4,13 @@
 
 .item {
     padding: 0 14px;
+    color: var(--mat-sys-on-primary-container);
 }
 
 .topbar {
     background-color: var(--mat-sys-primary-container);
-    color: var(--mat-sys-on-primary-container);
+}
+
+.active-button {
+    background:  color-mix(in srgb, var(--mat-sys-primary) 10%, transparent);
 }
